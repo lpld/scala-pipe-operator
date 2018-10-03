@@ -1,11 +1,10 @@
 package com.github.lpld.pipeoperator
 
-import cats.{Functor, Monad}
 import com.github.lpld.pipeoperator.pipe._
 
+import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.duration.DurationLong
-import scala.concurrent.{Await, ExecutionContext, Future}
-import ExecutionContext.Implicits._
+import scala.concurrent.{Await, Future}
 
 /**
   * @author leopold
@@ -33,7 +32,10 @@ object PipeDemo extends App {
   Thread.currentThread().getName |> println |> (Future.apply[Unit](_)) |> await
 
   // playing with cats:
-  import cats._, instances.all._, syntax.all._
+  import cats._
+  import instances.all._
+  import syntax.all._
+
   import language.higherKinds
 
   // if we use parentheses, we can make multiline expressions with pipe operator:
